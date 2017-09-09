@@ -40,10 +40,15 @@ contract Splitter {
 
 		//transfering
 		person1.transfer(balance[person1] - withdrawn[person1]);
-		withdrawn[person1] += balance[person1] - withdrawn[person1];
+		withdrawn[person1] = balance[person1]; // will be same after tarnfer
 
 		person2.transfer(balance[person2] - withdrawn[person2]);
-		withdrawn[person2] += balance[person2] - withdrawn[person2];
+		withdrawn[person2]  = balance[person2]; // will be same after the transfer
+
+		//remaining balance trasfer if necessary
+		if(remain != 0){
+			msg.sender.transfer(remain);
+		}
 
 	}
 
