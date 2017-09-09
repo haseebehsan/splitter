@@ -14,8 +14,8 @@ contract Splitter {
 	bool killer = false;
 
 
-	function Splitter(address _person1, address _person2){
-		owner = msg.sender;
+	function Splitter(address _owner, address _person1, address _person2){
+		owner = _owner;
 		person1 = _person1;
 		person2 = _person2;
 		balance[person1] = 0;
@@ -26,10 +26,12 @@ contract Splitter {
 
 	function split() public payable {
 		
-
+		//if contract has been killed
 		if(killer) throw;
 		//if there is no ammount, then throw
 		if(msg.value <= 0) throw;
+		//if persons themselves are sending
+		if(msg.sender == person1 || msg.sender == person2) throw;
 
 		uint half;
 		uint remain = 0;
@@ -57,7 +59,7 @@ contract Splitter {
 
 	function kill() public{
 		if(msg.sender != owner) throw;
-		kill = true;
+		killer = true;
 	}
 
 
