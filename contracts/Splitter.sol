@@ -6,10 +6,12 @@ contract Splitter {
 
 	address public person1;
 	address public person2;
-	address public owner;
+	address owner;
 
 	mapping(address => uint) public balance;
 	mapping(address => uint) public withdrawn;
+
+	bool killer = false;
 
 
 	function Splitter(address _person1, address _person2){
@@ -25,6 +27,7 @@ contract Splitter {
 	function split() public payable {
 		
 
+		if(killer) throw;
 		//if there is no ammount, then throw
 		if(msg.value <= 0) throw;
 
@@ -50,6 +53,11 @@ contract Splitter {
 			msg.sender.transfer(remain);
 		}
 
+	}
+
+	function kill() public{
+		if(msg.sender != owner) throw;
+		kill = true;
 	}
 
 
