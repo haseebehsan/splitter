@@ -1,6 +1,6 @@
 splitter
 
-An general purpose Ethereum smart Contract that splits the ethers sent to two persons
+A general purpose Ethereum smart Contract that splits the ethers sent to two persons
 
 Goal: goal of the contract was to create:
 
